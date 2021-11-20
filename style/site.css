@@ -1,0 +1,19 @@
+body {
+    background-image: url("../img/background.jpg");
+    
+}
+
+.navbar {
+    font-family: 'VT323', monospace;
+}
+
+#canvas-holder {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stones {
+    background-image: url("../img/stone2_brown0.png");
+}
