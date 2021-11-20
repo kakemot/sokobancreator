@@ -3,6 +3,11 @@ class Block {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
+        this.type = "block";
+    }
+
+    hasCollisions(x, y) {
+        //return false;
     }
 
     display() {
