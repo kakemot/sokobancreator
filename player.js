@@ -10,7 +10,7 @@ class Player {
         image(this.sprite, this.x, this.y);
     }
 
-    hasCollisions(x, y) {
+    hasCollisions(x, y, dirX, dirY) {
         let willCollide = false;
         for (let i = 0; i < objects.length; i++) {
             if (objects[i].type == "block") {
@@ -19,34 +19,87 @@ class Player {
                 }
             }
             if (objects[i].type == "crate") {
-                let crateIsRestricted = objects[i].hasCollisions(objects[i].x + x - this.x, objects[i].y + y - this.y);
+                let crateIsRestricted = objects[i].hasCollisions(objects[i].x + dirX, objects[i].y + dirY);
                 if (objects[i].x == x && objects[i].y == y && !crateIsRestricted) {
                     //move crate if player is touching it and it is free to move
-                        objects[i].x += x - this.x;
-                        objects[i].y += y - this.y;
+                        objects[i].move(dirX, dirY)
                     } else if (objects[i].x == x && objects[i].y == y && crateIsRestricted) {
                         willCollide = true;
-                    }
-              }
+                }
+            }
         }
         return willCollide;
-          }
+    }
+
+    checkForVictory() {
+        if (this.x == goal.x && this.y == goal.y) {
+            alert("You found the golden treasure!");
+        }
+    }
+
+    checkOutsideBounds(keyCode, newX, newY) {
+        if (keyCode == UP_ARROW) {
+            if (newY < 0) {
+                return (h*res) - 32;
+            } else {
+                return newY;
+            }
+        }
+
+        if (keyCode == DOWN_ARROW) {
+            if (newY >= h*res) {
+                return 0;
+            } else {
+                return newY;
+            }
+        }
+
+        if (keyCode == RIGHT_ARROW) {
+            if (newX >= w*res) {
+                return 0;
+            } else {
+                return newX;
+            }
+        }
+
+        if (keyCode == LEFT_ARROW) {
+            if (newX < 0) {
+                return (w*res) - 32;
+            } else {
+                return newX;
+            }
+        }
+    }
 
     move(keyCode) {
-        if (keyCode == UP_ARROW && !this.hasCollisions(this.x, this.y-32)) {
-            this.y -= 32;
+        if (keyCode == UP_ARROW) {
+            let wantToGoToY = this.checkOutsideBounds(keyCode, 0, this.y - 32);
+            if (!this.hasCollisions(this.x, wantToGoToY, 0, -32)) {
+                this.y = wantToGoToY;
+            }
         }
 
-        if (keyCode == DOWN_ARROW && !this.hasCollisions(this.x, this.y+32)) {
-            this.y += 32;
+        if (keyCode == DOWN_ARROW) {
+            let wantToGoToY = this.checkOutsideBounds(keyCode, 0, this.y + 32);
+            if (!this.hasCollisions(this.x, wantToGoToY, 0, 32)) {
+                this.y = wantToGoToY;
+            }
         }
 
-        if (keyCode == LEFT_ARROW && !this.hasCollisions(this.x-32, this.y)) {
-            this.x -= 32;
+        if (keyCode == LEFT_ARROW) {
+            let wantToGoToX = this.checkOutsideBounds(keyCode, this.x-32, 0);
+            if (!this.hasCollisions(wantToGoToX, this.y, -32, 0)) {
+                this.x = wantToGoToX;
+            }
         }
 
-        if (keyCode == RIGHT_ARROW && !this.hasCollisions(this.x+32, this.y)) {
-            this.x += 32;
+        if (keyCode == RIGHT_ARROW) {
+            let wantToGoToX = this.checkOutsideBounds(keyCode, this.x+32, 0);
+            if (!this.hasCollisions(wantToGoToX, this.y, 32, 0)) {
+                this.x = wantToGoToX;
+            }
         }
+
+    this.checkForVictory();
     }
 }
