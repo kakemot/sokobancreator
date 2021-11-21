@@ -19,12 +19,12 @@ class Player {
                 }
             }
             if (objects[i].type == "crate") {
-                let crateIsRestricted = objects[i].hasCollisions(objects[i].x + dirX, objects[i].y + dirY);
-                if (objects[i].x == x && objects[i].y == y && !crateIsRestricted) {
+                //let crateIsRestricted = objects[i].hasCollisions(x + dirX, y + dirY);
+                if (objects[i].x == x && objects[i].y == y) {
                     //move crate if player is touching it and it is free to move
-                        objects[i].move(dirX, dirY)
-                    } else if (objects[i].x == x && objects[i].y == y && crateIsRestricted) {
-                        willCollide = true;
+                        willCollide = objects[i].tryMove(dirX, dirY);
+                    //} else if (objects[i].x == x && objects[i].y == y && crateIsRestricted) {
+                        //willCollide = true;
                 }
             }
         }

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>p5.js example</title>
+  <title>dSokoban</title>
   <link rel="stylesheet" href="style/site.css">
  <!-- Font Awesome -->
 <link
@@ -36,7 +36,7 @@ rel="stylesheet"
 <body style="background-color: #3D3D3D">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Untitled game</a>
+      <a class="navbar-brand" href="#">dSokoban</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -65,16 +65,29 @@ rel="stylesheet"
   </nav>
   <main>
     <div class="item-select-container">
-      <select id="item-selected">
+      <div class="item-select-form">
+        <label for="level-name">Level name</label>
+        <input type="text" value="Untitled" id="level-name" class="form-control">
+      </div>
+      <div class="item-select-form">
+        <label for="item-selected">Select object</label>
+      <select id="item-selected" class="form-control">
         <option value="player">Player</option>
         <option value="block">Basic block</option>
         <option value="crate">Pushable block</option>
         <option value="goal">Golden treasure</option>
       </select>
     </div>
-    <div id="canvas-holder">
-      <!-- Our sketch will go here! -->
+
+    <div class="item-select-form">
+      <div id="canvas-holder">
+        <!-- Our sketch will go here! -->
+      </div>
     </div>
+    <div class="item-select-form">
+      <button onclick="uploadLevel()" type="button" class="btn btn-primary">Upload</button>
+    </div>
+  </div>
   </main>
 </body>
 </html>

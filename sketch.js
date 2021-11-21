@@ -1,48 +1,63 @@
-let playerSprite;
-let blockSprite;
-let crateSprite;
-let floorSprite;
 let player;
-let blocks = [];
-let crates = [];
+let items = [];
 let objects = [];
 let level;
+let sprites = [];
 let res = 32;
 let w = 9;
 let h = 14;
 
 function preload() {
-  playerSprite = loadImage('img/1.png');
-  blockSprite = loadImage('img/2.png');
-  floorSprite = loadImage('img/3.png');
-  crateSprite = loadImage('img/4.png');
+  items["player"] = Player;
+  items["block"] = Block;
+  items["crate"] = Crate;
+  items["goal"] = Goal;
+  sprites["player"] = loadImage('img/1.png');
+  sprites["block"] = loadImage('img/2.png');
+  sprites["floor"] = loadImage('img/3.png');
+  sprites["crate"] = loadImage('img/4.png');
+  sprites["goal"] = loadImage('img/goal.png');
 }
 
 function setup() {
   var canvas = createCanvas(w*res, h*res);
   canvas.parent('canvas-holder');
 
-  getLevel(1).then(data => {
-    console.log(data);
-    let levelObjects = data.split(";");
+  player = new Player(sprites["player"], 0, 0);
+  goal = new Goal(sprites["goal"], -200, -200);
 
+  getLevel(1).then(data => {
+  let result;
+    for (const [key, value] of Object.entries(data)) {
+      console.log(`${key}: ${value}`);
+      result = value;
+    }
+
+    let e = document.getElementById("level-title");
+    e.innerHTML = result.name;
+    let levelObjects = result.world.split(";");
+    
     for (i = 0; i<levelObjects.length; i++) {
       let entityInformation = levelObjects[i].split(",")
         createObject(entityInformation);
     }
   });
-
-  player = new Player(playerSprite, 32, 32);
 }
 
 function createObject(entityInformation) {
-  
-  if (entityInformation[0] == "block") {
-    objects.push(new Block(blockSprite, entityInformation[1], entityInformation[2]));
+  let entity = entityInformation[0];
+  let x = entityInformation[1] * 1;
+  let y = entityInformation[2] * 1;
+  if (entity != "player" && entity != "goal") {
+    objects.push(new items[entity](sprites[entity], x, y));
   }
 
-  if (entityInformation[0] == "crate") {
-    objects.push(new Crate(crateSprite, entityInformation[1]*1, entityInformation[2]*1));
+  if (entity == "player") {
+    player = new Player(sprites[entity], x, y);
+  }
+
+  if (entity == "goal") {
+    goal = new Goal(sprites[entity], x, y);
   }
 }
 
@@ -51,19 +66,16 @@ function draw() {
 
   for (let i = 0; i < w; i++) {
     for (let j = 0; j < h; j++) {
-      image(floorSprite, i*res, j*res);
+      image(sprites["floor"], i*res, j*res);
     } 
   }
 
   player.display();
+  goal.display();
   level = "";
   for (let i = 0; i < objects.length; i++) {
-    
-      //level += ";" + objects[i].type + "," + objects[i].x + "," + objects[i].y;
-    
       objects[i].display();
   }
-  //console.log(level);
 }
 
 function keyPressed() {
@@ -71,7 +83,7 @@ function keyPressed() {
 }
 
 async function getLevel(levelNumber) {
-  let response = await fetch("https://dsokoban-default-rtdb.europe-west1.firebasedatabase.app/level/" + levelNumber + ".json");
+  let response = await fetch("https://dsokoban-default-rtdb.europe-west1.firebasedatabase.app/level.json?id=1");
   let data = await response.json();
   return data;
 }

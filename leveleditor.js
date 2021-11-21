@@ -3,12 +3,9 @@ let goal;
 let items = [];
 let sprites = [];
 let objects = [];
-let level;
 let res = 32;
 let w = 9;
 let h = 14;
-
-const levelObjects = level.split(";");
 
 function preload() {
   items["player"] = Player;
@@ -41,7 +38,6 @@ function draw() {
   }
   goal.display();
   player.display();
-  level = "";
   for (let i = 0; i < objects.length; i++) {
       objects[i].display();
   }
@@ -75,14 +71,47 @@ function addItem() {
     if (!removeItem) {
         objects.push(new selectedItem(sprites[e.value], mx, my));
     }
-
   }
 
 function keyPressed() {
-    level = "";
+    player.move(keyCode);
+}
+
+function generateLevel() {
+    let level = "";
+
     for (let i = 0; i < objects.length; i++) {
         level += ";" + objects[i].type + "," + objects[i].x + "," + objects[i].y;
     }
-    console.log(level);
-    player.move(keyCode);
+    level += ";" + player.type + "," + player.x + "," + player.y;
+    level += ";" + goal.type + "," + goal.x + "," + goal.y;
+    return level.substring(1);
+}
+
+function uploadLevel() {
+    let world = generateLevel();
+    let name = document.getElementById("level-name").value;
+
+    let data = {
+            id: 2,
+            name: name,
+            world: world
+      }
+    console.log(data);
+    fetch('https://dsokoban-default-rtdb.europe-west1.firebasedatabase.app/level/0.json', {
+        accept: "application/json",
+        contentType: "application/json; charset=utf-8",
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }

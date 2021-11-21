@@ -8,12 +8,36 @@ body {
 }
 
 #canvas-holder {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.item-select-container {
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 50%;
+}
+
+.item-select-form {
+    padding: 10px;
+}
+
 .stones {
     background-image: url("../img/stone2_brown0.png");
+}
+
+#level-title {
+    font-family: 'VT323', monospace;
+    text-shadow: 2px 2px black;
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+    font-size: 24px;
 }

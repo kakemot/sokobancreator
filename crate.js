@@ -6,13 +6,51 @@ class Crate {
         this.type = "crate";
     }
 
+    tryMove(x, y) {
+        let wrap = this.checkOutsideBounds(this.x + x, this.y + y);
+        let blockedPath = false;
+        for (let i = 0; i < objects.length; i++) {
+                if (objects[i].x == this.x + x && objects[i].y == this.y + y) {
+                    blockedPath = true;
+                }
+
+                if (objects[i].x == wrap.x && objects[i].y == wrap.y) {
+                    blockedPath = true;
+                }   
+        }
+        if (!blockedPath) {
+            this.move(x, y);
+        }
+    return blockedPath;
+}
+
     move(x,y) {
         this.x += x;
         this.y += y;
-        this.checkOutsideBounds();
+        this.wrapAround();
     }
 
-    checkOutsideBounds() {
+    checkOutsideBounds(x, y) {
+        let coords = {x: x, y: y};
+        if (x >= w*res) {
+            coords.x = 0;
+        }
+
+        if (x < 0) {
+            coords.x = (w*res) - 32;
+        }
+
+        if (y >= h*res) {
+            coords.y = 0;
+        }
+
+        if (y < 0) {
+            coords.y = (h*res) - 32;
+        }
+        return coords;
+    }
+
+    wrapAround() {
         if (this.x >= w*res) {
             this.x = 0;
         }
@@ -28,7 +66,6 @@ class Crate {
         if (this.y < 0) {
             this.y = (h*res) - 32;
         }
-
     }
 
     hasCollisions(x, y) {
