@@ -6,6 +6,8 @@ let sprites = [];
 let res = 32;
 let w = 9;
 let h = 14;
+let levels = [];
+let currentLevel = 0;
 
 function preload() {
   items["player"] = Player;
@@ -27,21 +29,24 @@ function setup() {
   goal = new Goal(sprites["goal"], -200, -200);
 
   getLevel(1).then(data => {
-  let result;
     for (const [key, value] of Object.entries(data)) {
       console.log(`${key}: ${value}`);
-      result = value;
+      levels.push(value);
     }
+    loadLevel();
+  });
+}
 
-    let e = document.getElementById("level-title");
-    e.innerHTML = result.name;
-    let levelObjects = result.world.split(";");
-    
+function loadLevel() {
+  objects = [];
+  let e = document.getElementById("level-title");
+    e.innerHTML = levels[currentLevel].name;
+    let levelObjects = levels[currentLevel].world.split(";");
+  
     for (i = 0; i<levelObjects.length; i++) {
       let entityInformation = levelObjects[i].split(",")
         createObject(entityInformation);
     }
-  });
 }
 
 function createObject(entityInformation) {
@@ -86,4 +91,14 @@ async function getLevel(levelNumber) {
   let response = await fetch("https://dsokoban-default-rtdb.europe-west1.firebasedatabase.app/level.json?id=1");
   let data = await response.json();
   return data;
+}
+
+function nextLevel() {
+  currentLevel ++;
+  loadLevel();
+}
+
+function previousLevel() {
+  currentLevel --;
+  loadLevel();
 }

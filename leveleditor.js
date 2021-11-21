@@ -93,12 +93,11 @@ function uploadLevel() {
     let name = document.getElementById("level-name").value;
 
     let data = {
-            id: 2,
             name: name,
             world: world
       }
     console.log(data);
-    fetch('https://dsokoban-default-rtdb.europe-west1.firebasedatabase.app/level/0.json', {
+    fetch('https://dsokoban-default-rtdb.europe-west1.firebasedatabase.app/level.json', {
         accept: "application/json",
         contentType: "application/json; charset=utf-8",
         method: 'POST',

@@ -41,3 +41,7 @@ body {
     margin-top: 10px;
     font-size: 24px;
 }
+
+.level-buttons {
+    text-align: center;
+}
