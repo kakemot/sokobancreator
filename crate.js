@@ -3,6 +3,7 @@ class Crate {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
+        this.name = "crate";
         this.type = "crate";
     }
 
@@ -10,11 +11,11 @@ class Crate {
         let wrap = this.checkOutsideBounds(this.x + x, this.y + y);
         let blockedPath = false;
         for (let i = 0; i < objects.length; i++) {
-                if (objects[i].x == this.x + x && objects[i].y == this.y + y) {
+                if (objects[i].x == this.x + x && objects[i].y == this.y + y && objects[i].type != "no-collide") {
                     blockedPath = true;
                 }
 
-                if (objects[i].x == wrap.x && objects[i].y == wrap.y) {
+                if (objects[i].x == wrap.x && objects[i].y == wrap.y && objects[i].type != "no-collide") {
                     blockedPath = true;
                 }   
         }

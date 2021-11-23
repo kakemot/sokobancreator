@@ -3,6 +3,7 @@ class Block {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
+        this.name = "block";
         this.type = "block";
     }
 

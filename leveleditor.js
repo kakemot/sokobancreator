@@ -7,18 +7,6 @@ let res = 32;
 let w = 9;
 let h = 14;
 
-function preload() {
-  items["player"] = Player;
-  items["block"] = Block;
-  items["crate"] = Crate;
-  items["goal"] = Goal;
-  sprites["player"] = loadImage('img/1.png');
-  sprites["block"] = loadImage('img/2.png');
-  sprites["floor"] = loadImage('img/3.png');
-  sprites["crate"] = loadImage('img/4.png');
-  sprites["goal"] = loadImage('img/goal.png');
-}
-
 function setup() {
     var canvas = createCanvas(w*res, h*res);
     canvas.parent('canvas-holder');
@@ -37,10 +25,10 @@ function draw() {
     } 
   }
   goal.display();
-  player.display();
   for (let i = 0; i < objects.length; i++) {
       objects[i].display();
   }
+  player.display();
 }
 
 function addItem() {

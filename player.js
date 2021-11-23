@@ -3,6 +3,7 @@ class Player {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
+        this.name = "player";
         this.type = "player";
     }
 
@@ -33,7 +34,7 @@ class Player {
 
     checkForVictory() {
         if (this.x == goal.x && this.y == goal.y) {
-            alert("You found the golden treasure!");
+            gameWon = true;
         }
     }
 
@@ -71,6 +72,14 @@ class Player {
         }
     }
 
+    checkIfGateIsUnlocked() {
+        for (i = 0; i < objects.length; i++) {
+            if(objects[i].name == "gateunlocker") {
+                objects[i].checkCollisions();
+            }
+        }
+    }
+
     move(keyCode) {
         if (keyCode == UP_ARROW) {
             let wantToGoToY = this.checkOutsideBounds(keyCode, 0, this.y - 32);
@@ -101,5 +110,6 @@ class Player {
         }
 
     this.checkForVictory();
+    this.checkIfGateIsUnlocked();
     }
 }

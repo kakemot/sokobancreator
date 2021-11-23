@@ -8,22 +8,13 @@ let w = 9;
 let h = 14;
 let levels = [];
 let currentLevel = 0;
-
-function preload() {
-  items["player"] = Player;
-  items["block"] = Block;
-  items["crate"] = Crate;
-  items["goal"] = Goal;
-  sprites["player"] = loadImage('img/1.png');
-  sprites["block"] = loadImage('img/2.png');
-  sprites["floor"] = loadImage('img/3.png');
-  sprites["crate"] = loadImage('img/4.png');
-  sprites["goal"] = loadImage('img/goal.png');
-}
+let gameWon = false;
 
 function setup() {
   var canvas = createCanvas(w*res, h*res);
   canvas.parent('canvas-holder');
+
+  textSize(20);
 
   player = new Player(sprites["player"], 0, 0);
   goal = new Goal(sprites["goal"], -200, -200);
@@ -67,6 +58,7 @@ function createObject(entityInformation) {
 }
 
 function draw() {
+
   background('#222222');
 
   for (let i = 0; i < w; i++) {
@@ -74,12 +66,17 @@ function draw() {
       image(sprites["floor"], i*res, j*res);
     } 
   }
-
-  player.display();
   goal.display();
   level = "";
   for (let i = 0; i < objects.length; i++) {
       objects[i].display();
+  }
+  player.display();
+  if (gameWon) {
+    fill(0, 0, 0);
+    text("You made it. Congratulations!", 22, 102);
+    fill(255, 255, 255);
+    text("You made it. Congratulations!", 20, 100);
   }
 }
 
