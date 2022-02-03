@@ -81,17 +81,14 @@ function uploadLevel() {
     let name = document.getElementById("level-name").value;
 
     let data = {
-            name: name,
-            world: world
+            levelName: name,
+            levelContent: world
       }
     console.log(data);
-    fetch('https://dsokoban-default-rtdb.europe-west1.firebasedatabase.app/level.json', {
-        accept: "application/json",
-        contentType: "application/json; charset=utf-8",
+    fetch('https://sokoban-server-k9xmz.ondigitalocean.app/api/Levels/PostTodoItem/', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
-            'content-type': 'application/json'
+            'Content-Type': 'application/json'  
         },
         body: JSON.stringify(data)
         })

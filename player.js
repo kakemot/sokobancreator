@@ -35,6 +35,7 @@ class Player {
     checkForVictory() {
         if (this.x == goal.x && this.y == goal.y) {
             gameWon = true;
+            objects = [];
         }
     }
 

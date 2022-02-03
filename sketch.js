@@ -7,7 +7,7 @@ let res = 32;
 let w = 9;
 let h = 14;
 let levels = [];
-let currentLevel = 0;
+let currentLevel = 1;
 let gameWon = false;
 
 function setup() {
@@ -18,26 +18,20 @@ function setup() {
 
   player = new Player(sprites["player"], 0, 0);
   goal = new Goal(sprites["goal"], -200, -200);
-
-  getLevel(1).then(data => {
-    for (const [key, value] of Object.entries(data)) {
-      console.log(`${key}: ${value}`);
-      levels.push(value);
-    }
-    loadLevel();
-  });
+  loadLevel(currentLevel);
 }
 
-function loadLevel() {
+function loadLevel(id) {
+  getLevel(id).then(levelData => {
   objects = [];
   let e = document.getElementById("level-title");
-    e.innerHTML = "Level " + currentLevel + ": " + levels[currentLevel].name;
-    let levelObjects = levels[currentLevel].world.split(";");
-  
+    e.innerHTML = "Level " + levelData.id + ": " + levelData.levelName;
+    let levelObjects = levelData.levelContent.split(";");
     for (i = 0; i<levelObjects.length; i++) {
       let entityInformation = levelObjects[i].split(",")
         createObject(entityInformation);
     }
+  });
 }
 
 function createObject(entityInformation) {
@@ -58,7 +52,6 @@ function createObject(entityInformation) {
 }
 
 function draw() {
-
   background('#222222');
 
   for (let i = 0; i < w; i++) {
@@ -73,6 +66,7 @@ function draw() {
   }
   player.display();
   if (gameWon) {
+    background('#FFFFFF');
     fill(0, 0, 0);
     text("You made it. Congratulations!", 22, 102);
     fill(255, 255, 255);
@@ -85,17 +79,17 @@ function keyPressed() {
 }
 
 async function getLevel(levelNumber) {
-  let response = await fetch("https://dsokoban-default-rtdb.europe-west1.firebasedatabase.app/level.json");
+  let response = await fetch("https://sokoban-server-k9xmz.ondigitalocean.app/api/Levels/Get/" + levelNumber);
   let data = await response.json();
   return data;
 }
 
 function nextLevel() {
   currentLevel ++;
-  loadLevel();
+  loadLevel(currentLevel);
 }
 
 function previousLevel() {
   currentLevel --;
-  loadLevel();
+  loadLevel(currentLevel);
 }
