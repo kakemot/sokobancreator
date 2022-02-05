@@ -85,30 +85,60 @@ body {
 }
 
 .arrow {
+    display: none;
     position: relative;
-    opacity: 0.2;
 }
 
 .arrow-left {
+    border: 2px solid blue;
     position: absolute;
     left: 0px;
     top: -80px;
+    opacity: 0.35;
 }
 
 .arrow-right {
+    border: 2px solid blue;
     position: absolute;
     left: 224px;
     top: -80px;
+    opacity: 0.35;
 }
 
 .arrow-up {
+    border: 2px solid blue;
     position: absolute;
     left: 80px;
     top: -100px;
+    opacity: 0.35;
 }
 
 .arrow-down {
+    border: 2px solid blue;
     position: absolute;
     left: 80px;
     top: -10px;
+    opacity: 0.35;
 }
+
+.arrow-down:active {
+    opacity: 1;
+}
+
+.arrow-up:active {
+    opacity: 1;
+}
+
+.arrow-left:active {
+    opacity: 1;
+}
+
+.arrow-right:active {
+    opacity: 1;
+}
+
+@media only screen and (max-width: 600px) {
+    .arrow {
+      display: block;
+    }
+  }
