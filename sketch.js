@@ -85,12 +85,12 @@ async function getLevel(levelNumber) {
 
 function nextLevel() {
   currentLevel ++;
-  loadLevel(currentLevel);
+  window.location.href = "index.html?level=" + currentLevel;
 }
 
 function previousLevel() {
   currentLevel --;
-  loadLevel(currentLevel);
+  window.location.href = "index.html?level=" + currentLevel;
 }
 
 function readLevelFromUrlOrReturnDefaultLevel() {

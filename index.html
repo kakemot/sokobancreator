@@ -37,6 +37,11 @@ rel="stylesheet"
 </head>
 
 <body style="background-color: #3D3D3D">
+  <div class="wrapper">
+    <div id="level-title">
+      Loading level...
+    </div>
+  </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">dSokoban</a>
@@ -51,6 +56,7 @@ rel="stylesheet"
       >
         <i class="fas fa-bars"></i>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -67,12 +73,21 @@ rel="stylesheet"
     </div>
   </nav>
   <main>
-    <div id="level-title">
-      Level name here yah
-    </div>
     <div id="canvas-holder">
-      <!-- Our sketch will go here! -->
+    <div class="arrow">
+      <img src="img/arrow_left.png" class="arrow-left" onclick="player.move(LEFT_ARROW)">
     </div>
+    <div class="arrow">
+      <img src="img/arrow_right.png" class="arrow-right" onclick="player.move(RIGHT_ARROW)">
+    </div>
+    <div class="arrow">
+      <img src="img/arrow_up.png" class="arrow-up" onclick="player.move(UP_ARROW)">
+    </div>
+    <div class="arrow">
+      <img src="img/arrow_down.png" class="arrow-down" onclick="player.move(DOWN_ARROW)">
+    </div>
+    </div>
+  </div>
     <div class="level-buttons">
       <button onclick="previousLevel()" class="btn btn-primary">Prev</button><button onclick="nextLevel()" class="btn btn-primary">Next</button>
     </div>

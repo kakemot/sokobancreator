@@ -1,6 +1,5 @@
 body {
     background-image: url("../img/background.jpg");
-    
 }
 
 .navbar {
@@ -71,4 +70,45 @@ body {
 
 #ready-notifier {
     display: none;
+}
+
+.wrapper {
+    position: absolute;
+    top: 8px;
+    width: 100%;
+    z-index: 10;
+}
+
+#level-title {
+    text-align: center;
+    font-size: 16px;
+}
+
+.arrow {
+    position: relative;
+    opacity: 0.2;
+}
+
+.arrow-left {
+    position: absolute;
+    left: 0px;
+    top: -80px;
+}
+
+.arrow-right {
+    position: absolute;
+    left: 224px;
+    top: -80px;
+}
+
+.arrow-up {
+    position: absolute;
+    left: 80px;
+    top: -100px;
+}
+
+.arrow-down {
+    position: absolute;
+    left: 80px;
+    top: -10px;
 }
