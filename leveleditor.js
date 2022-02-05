@@ -79,21 +79,25 @@ function generateLevel() {
 function uploadLevel() {
     let world = generateLevel();
     let name = document.getElementById("level-name").value;
-
+    document.getElementById("uploading-notifier").style.display = "block";
     let data = {
             levelName: name,
             levelContent: world
       }
     console.log(data);
-    fetch('https://sokoban-server-k9xmz.ondigitalocean.app/api/Levels/PostTodoItem/', {
+
+    fetch('https://sokoban-server-k9xmz.ondigitalocean.app/api/Levels/PostNewLevel/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'  
         },
         body: JSON.stringify(data)
         })
+        .then(response => response.json())
         .then(response => {
-            console.log(response)
+            document.getElementById("ready-notifier").style.display = "block";
+            document.getElementById("link-to-new-level").href = "index.html?level=" + response.id;
+            console.log(response);
         })
         .catch(err => {
             console.log(err)

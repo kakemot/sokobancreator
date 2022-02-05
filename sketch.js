@@ -7,7 +7,7 @@ let res = 32;
 let w = 9;
 let h = 14;
 let levels = [];
-let currentLevel = 1;
+let currentLevel = readLevelFromUrlOrReturnDefaultLevel();
 let gameWon = false;
 
 function setup() {
@@ -23,6 +23,7 @@ function setup() {
 
 function loadLevel(id) {
   getLevel(id).then(levelData => {
+  gameWon = false;
   objects = [];
   let e = document.getElementById("level-title");
     e.innerHTML = "Level " + levelData.id + ": " + levelData.levelName;
@@ -66,9 +67,7 @@ function draw() {
   }
   player.display();
   if (gameWon) {
-    background('#FFFFFF');
-    fill(0, 0, 0);
-    text("You made it. Congratulations!", 22, 102);
+    background('#000000');
     fill(255, 255, 255);
     text("You made it. Congratulations!", 20, 100);
   }
@@ -92,4 +91,11 @@ function nextLevel() {
 function previousLevel() {
   currentLevel --;
   loadLevel(currentLevel);
+}
+
+function readLevelFromUrlOrReturnDefaultLevel() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const levelId = urlParams.get('level')
+  return (levelId == "" ? "1" : levelId)
 }
