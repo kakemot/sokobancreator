@@ -21,4 +21,3 @@ class Goal {
         image(this.sprite, this.x, this.y);
     }
 }
-

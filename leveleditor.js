@@ -69,10 +69,10 @@ function generateLevel() {
     let level = "";
 
     for (let i = 0; i < objects.length; i++) {
-        level += ";" + objects[i].type + "," + objects[i].x + "," + objects[i].y;
+        level += ";" + objects[i].name + "," + objects[i].x + "," + objects[i].y;
     }
-    level += ";" + player.type + "," + player.x + "," + player.y;
-    level += ";" + goal.type + "," + goal.x + "," + goal.y;
+    level += ";" + player.name + "," + player.x + "," + player.y;
+    level += ";" + goal.name + "," + goal.x + "," + goal.y;
     return level.substring(1);
 }
 

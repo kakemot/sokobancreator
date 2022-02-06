@@ -16,7 +16,7 @@ class GateUnlocker {
         }
     }
 
-    openGates() {
+    lockGates() {
         for (i = 0; i < objects.length; i++) {
             if (objects[i].name == "gate") {
                 objects[i].locked = true;
@@ -26,13 +26,16 @@ class GateUnlocker {
     }
 
     checkCollisions() {
-        this.openGates();
+        this.lockGates();
         for (i = 0; i < objects.length; i++) {
             if(objects[i].name != "gateunlocker") {
                 if (objects[i].x == this.x && objects[i].y == this.y) {
                     this.unlockGates();
                 }
             }
+        }
+        if (player.x == this.x && player.y == this.y) {
+            this.unlockGates();
         }
     }
 
