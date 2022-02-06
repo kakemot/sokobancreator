@@ -93,9 +93,14 @@ function previousLevel() {
   window.location.href = "index.html?level=" + currentLevel;
 }
 
+function retryLevel() {
+  loadLevel(currentLevel);
+}
+
 function readLevelFromUrlOrReturnDefaultLevel() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const levelId = urlParams.get('level')
-  return (levelId == "" ? "1" : levelId)
+  const levelId = urlParams.get('level');
+  console.log(levelId);
+  return (levelId == null ? "1" : levelId)
 }

@@ -3,7 +3,8 @@ class Goal {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
-        this.type = "goal";
+        this.name = "goal";
+        this.type = "block";
     }
 
     hasCollisions(x, y) {
