@@ -21,21 +21,29 @@ class GateUnlocker {
 
     unlockGates() {
         let gates = objects.filter(x => x.name=="gate");
+        let negativegates = objects.filter(x => x.name=="gatenegative");
         for (i = 0; i < gates.length; i++) {
-            if (gates[i].name == "gate") {
                 gates[i].locked = false;
                 gates[i].type = "no-collide";
-            }
+        }
+
+        for (i = 0; i < negativegates.length; i++) {
+            negativegates[i].locked = true;
+            negativegates[i].type = "block";
         }
     }
 
     lockGates() {
         let gates = objects.filter(x => x.name=="gate");
+        let negativegates = objects.filter(x => x.name=="gatenegative");
         for (i = 0; i < gates.length; i++) {
-            if (gates[i].name == "gate") {
-                gates[i].locked = true;
-                gates[i].type = "block";
-            }
+            gates[i].locked = true;
+            gates[i].type = "block";
+        }
+
+        for (i = 0; i < negativegates.length; i++) {
+            negativegates[i].locked = false;
+            negativegates[i].type = "no-collide";
         }
     }
 
