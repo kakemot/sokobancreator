@@ -33,7 +33,7 @@ function draw() {
 
 function addItem() {
     let removeItem = false;
-    let e = document.getElementById("item-selected");
+    let e = document.querySelector('input[name="items"]:checked');
     let selectedItem = items[e.value];
     console.log(e.value);
     let mx = Math.floor(mouseX / 32) * 32;

@@ -77,15 +77,34 @@ rel="stylesheet"
         <input type="text" value="Untitled" id="level-name" class="form-control">
       </div>
       <div class="item-select-form">
-        <label for="item-selected">Select object</label>
-      <select id="item-selected" class="form-control">
-        <option value="player">Player</option>
-        <option value="block">Basic block</option>
-        <option value="crate">Pushable block</option>
-        <option value="goal">Golden treasure</option>
-        <option value="gate">Locked gate</option>
-        <option value="gateunlocker">Gate unlocker</option>
-      </select>
+        <label>
+          <input type="radio" name="items" value="player" checked>
+          <img src="img/player.png">
+        </label>
+        <label>
+          <input type="radio" name="items" value="block">
+          <img src="img/block.png">
+        </label>
+
+        <label>
+          <input type="radio" name="items" value="crate">
+          <img src="img/crate.png">
+        </label>
+
+        <label>
+          <input type="radio" name="items" value="goal">
+          <img src="img/goal.png">
+        </label>
+
+        <label>
+          <input type="radio" name="items" value="gate">
+          <img src="img/bluewall.png">
+        </label>
+
+        <label>
+          <input type="radio" name="items" value="gateunlocker">
+          <img src="img/gateunlocker.png">
+        </label>
     </div>
 
     <div class="item-select-form">

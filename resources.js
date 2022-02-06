@@ -5,10 +5,10 @@ function preload() {
     items["goal"] = Goal;
     items["gate"] = Gate;
     items["gateunlocker"] = GateUnlocker;
-    sprites["player"] = loadImage('img/1.png');
-    sprites["block"] = loadImage('img/2.png');
-    sprites["floor"] = loadImage('img/3.png');
-    sprites["crate"] = loadImage('img/4.png');
+    sprites["player"] = loadImage('img/player.png');
+    sprites["block"] = loadImage('img/block.png');
+    sprites["floor"] = loadImage('img/floor.png');
+    sprites["crate"] = loadImage('img/crate.png');
     sprites["goal"] = loadImage('img/goal.png');
     sprites["gate"] = loadImage('img/bluewall.png');
     sprites["gateunlocker"] = loadImage('img/gateunlocker.png');
