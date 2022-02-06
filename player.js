@@ -74,9 +74,10 @@ class Player {
     }
 
     checkIfGateIsUnlocked() {
-        for (i = 0; i < objects.length; i++) {
-            if(objects[i].name == "gateunlocker") {
-                objects[i].checkCollisions();
+        let gateUnlockers = objects.filter(x => x.name == "gateunlocker");
+        for (let i = 0; i < gateUnlockers.length; i++) {
+            if(gateUnlockers[i].name == "gateunlocker") {
+                gateUnlockers[i].checkCollisions();
             }
         }
     }

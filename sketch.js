@@ -7,6 +7,7 @@ let res = 32;
 let w = 9;
 let h = 14;
 let levels = [];
+let unlockedGates = 0;
 let currentLevel = readLevelFromUrlOrReturnDefaultLevel();
 let gameWon = false;
 
