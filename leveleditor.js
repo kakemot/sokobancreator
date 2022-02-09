@@ -6,6 +6,7 @@ let objects = [];
 let res = 32;
 let w = 9;
 let h = 14;
+let goals = [];
 
 function setup() {
     var canvas = createCanvas(w*res, h*res);
@@ -24,7 +25,11 @@ function draw() {
       image(sprites["floor"], i*res, j*res);
     } 
   }
-  goal.display();
+
+  for (let i = 0; i < goals.length; i++) {
+    goals[i].display();
+  }
+
   for (let i = 0; i < objects.length; i++) {
       objects[i].display();
   }
@@ -53,6 +58,7 @@ function addItem() {
 
     if (e.value == "goal") {
         goal = new Goal(sprites["goal"], mx, my);
+        goals.push(goal);
         removeItem = true;
     }
 
@@ -71,8 +77,12 @@ function generateLevel() {
     for (let i = 0; i < objects.length; i++) {
         level += ";" + objects[i].name + "," + objects[i].x + "," + objects[i].y;
     }
+
+    for (let i = 0; i < goals.length; i++) {
+        level += ";" + goals[i].name + "," + goals[i].x + "," + goals[i].y;
+    }
+
     level += ";" + player.name + "," + player.x + "," + player.y;
-    level += ";" + goal.name + "," + goal.x + "," + goal.y;
     return level.substring(1);
 }
 

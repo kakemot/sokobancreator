@@ -10,6 +10,7 @@ let levels = [];
 let unlockedGates = 0;
 let currentLevel = readLevelFromUrlOrReturnDefaultLevel();
 let gameWon = false;
+let goals = [];
 
 function setup() {
   var canvas = createCanvas(w*res, h*res);
@@ -50,6 +51,7 @@ function createObject(entityInformation) {
 
   if (entity == "goal") {
     goal = new Goal(sprites[entity], x, y);
+    goals.push(goal);
   }
 }
 
@@ -61,7 +63,11 @@ function draw() {
       image(sprites["floor"], i*res, j*res);
     } 
   }
-  goal.display();
+
+  for (let i = 0; i < goals.length; i++) {
+    goals[i].display();
+  }
+  
   level = "";
   for (let i = 0; i < objects.length; i++) {
       objects[i].display();

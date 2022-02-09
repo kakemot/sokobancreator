@@ -20,7 +20,6 @@ class Gate {
         } else {
             image(this.sprite, this.x, this.y);
         }
-        
     }
 }
 

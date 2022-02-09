@@ -33,7 +33,13 @@ class Player {
     }
 
     checkForVictory() {
-        if (this.x == goal.x && this.y == goal.y) {
+        for (let i=0; i<goals.length; i++) {
+            if (this.x == goals[i].x && this.y == goals[i].y) {
+                //gameWon = true;
+                goals.splice(i, 1);
+            }
+        }
+        if (goals.length == 0) {
             gameWon = true;
             objects = [];
         }
