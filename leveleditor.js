@@ -6,15 +6,12 @@ let objects = [];
 let res = 32;
 let w = 9;
 let h = 14;
-let goals = [];
 
 function setup() {
     var canvas = createCanvas(w*res, h*res);
     canvas.parent('canvas-holder');
     canvas.mouseClicked(addItem);
-
-  player = new Player(sprites["player"], 32, 32);
-  goal = new Goal(sprites["goal"], 32, 128);
+    player = new Player(sprites["player"], 32, 32);
 }
 
 function draw() {
@@ -24,10 +21,6 @@ function draw() {
     for (let j = 0; j < h; j++) {
       image(sprites["floor"], i*res, j*res);
     } 
-  }
-
-  for (let i = 0; i < goals.length; i++) {
-    goals[i].display();
   }
 
   for (let i = 0; i < objects.length; i++) {
@@ -56,12 +49,6 @@ function addItem() {
         removeItem = true;
     }
 
-    if (e.value == "goal") {
-        goal = new Goal(sprites["goal"], mx, my);
-        goals.push(goal);
-        removeItem = true;
-    }
-
     if (!removeItem) {
         objects.push(new selectedItem(sprites[e.value], mx, my));
     }
@@ -76,10 +63,6 @@ function generateLevel() {
 
     for (let i = 0; i < objects.length; i++) {
         level += ";" + objects[i].name + "," + objects[i].x + "," + objects[i].y;
-    }
-
-    for (let i = 0; i < goals.length; i++) {
-        level += ";" + goals[i].name + "," + goals[i].x + "," + goals[i].y;
     }
 
     level += ";" + player.name + "," + player.x + "," + player.y;
