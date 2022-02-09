@@ -14,7 +14,7 @@ class Player {
     hasCollisions(x, y, dirX, dirY) {
         let willCollide = false;
         for (let i = 0; i < objects.length; i++) {
-            if (objects[i].type == "block") {
+            if (objects[i].type == "block" && objects[i].name != "goal") {
                 if (objects[i].x == x && objects[i].y == y) {
                     willCollide = true;
                 }
@@ -33,13 +33,12 @@ class Player {
     }
 
     checkForVictory() {
-        for (let i=0; i<goals.length; i++) {
-            if (this.x == goals[i].x && this.y == goals[i].y) {
-                //gameWon = true;
-                goals.splice(i, 1);
+        for (let i=0; i<objects.length; i++) {
+            if (this.x == objects[i].x && this.y == objects[i].y && objects[i].name == "goal") {
+                objects.splice(i, 1);
             }
         }
-        if (goals.length == 0) {
+        if (objects.filter(x => x.name=="goal").length == 0) {
             gameWon = true;
             objects = [];
         }

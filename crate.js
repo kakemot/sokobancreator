@@ -20,15 +20,6 @@ class Crate {
                 }   
         }
 
-        //Also check the goal object since it is not a part of the object array
-        if (goal.x == this.x + x && goal.y == this.y + y) {
-            blockedPath = true;
-        }
-
-        if (goal.x == wrap.x && goal.y == wrap.y) {
-            blockedPath = true;
-        } 
-
         if (!blockedPath) {
             this.move(x, y);
         }

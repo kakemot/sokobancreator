@@ -10,7 +10,6 @@ let levels = [];
 let unlockedGates = 0;
 let currentLevel = readLevelFromUrlOrReturnDefaultLevel();
 let gameWon = false;
-let goals = [];
 
 function setup() {
   var canvas = createCanvas(w*res, h*res);
@@ -19,7 +18,6 @@ function setup() {
   textSize(20);
 
   player = new Player(sprites["player"], 0, 0);
-  goal = new Goal(sprites["goal"], -200, -200);
   loadLevel(currentLevel);
 }
 
@@ -41,17 +39,12 @@ function createObject(entityInformation) {
   let entity = entityInformation[0];
   let x = entityInformation[1] * 1;
   let y = entityInformation[2] * 1;
-  if (entity != "player" && entity != "goal") {
+  if (entity != "player") {
     objects.push(new items[entity](sprites[entity], x, y));
   }
 
   if (entity == "player") {
     player = new Player(sprites[entity], x, y);
-  }
-
-  if (entity == "goal") {
-    goal = new Goal(sprites[entity], x, y);
-    goals.push(goal);
   }
 }
 
@@ -62,10 +55,6 @@ function draw() {
     for (let j = 0; j < h; j++) {
       image(sprites["floor"], i*res, j*res);
     } 
-  }
-
-  for (let i = 0; i < goals.length; i++) {
-    goals[i].display();
   }
   
   level = "";
