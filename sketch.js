@@ -74,7 +74,7 @@ function keyPressed() {
 }
 
 async function getLevel(levelNumber) {
-  let response = await fetch("https://sokoban-server-k9xmz.ondigitalocean.app/api/Levels/Get/" + levelNumber);
+  let response = await fetch("https://localhost:7294/api/Levels/Get/" + levelNumber);
   let data = await response.json();
   return data;
 }

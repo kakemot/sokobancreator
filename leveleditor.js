@@ -79,7 +79,7 @@ function uploadLevel() {
       }
     console.log(data);
 
-    fetch('https://sokoban-server-k9xmz.ondigitalocean.app/api/Levels/PostNewLevel/', {
+    fetch('https://localhost:7294/api/Levels/PostNewLevel/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'  
