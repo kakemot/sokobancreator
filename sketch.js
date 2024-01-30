@@ -74,8 +74,14 @@ function keyPressed() {
 }
 
 async function getLevel(levelNumber) {
-  let response = await fetch("https://localhost:7294/api/Levels/Get/" + levelNumber);
-  let data = await response.json();
+  //let response = await fetch("https://localhost:7294/api/Levels/Get/" + levelNumber);
+  //let data = await response.json();
+
+  let data = {
+    levelContent: "block,0,0;block,32,0;block,64,0;block,96,0;block,0,32;block,0,96;block,0,128;block,0,160;block,0,192;block,32,192;block,64,192;block,256,0;block,256,32;block,256,96;block,256,96;block,256,128;block,256,160;block,256,192;block,256,224;block,256,256;block,256,288;block,256,320;block,256,352;block,256,384;block,256,416;block,224,416;block,192,416;block,160,416;block,128,416;block,96,416;block,64,416;block,32,416;block,0,416;block,0,384;block,0,352;block,0,320;block,0,288;block,0,256;block,0,224;block,224,192;block,192,192;crate,96,192;crate,128,192;crate,160,192;block,32,256;block,64,256;block,96,256;block,160,256;block,224,256;block,192,256;block,128,320;block,96,320;block,64,320;block,32,320;block,160,320;goal,192,384;block,128,0;block,160,0;block,192,0;block,224,0;crate,192,64;block,64,64;block,64,96;block,64,128;gateunlocker,32,64;gate,128,256;player,32,32",
+    levelName: "Test level"
+    }
+
   return data;
 }
 
